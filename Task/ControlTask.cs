@@ -1,6 +1,8 @@
-﻿int arrSize = 1;
-string[] array = new string[arrSize];
-string value;
+﻿int arrSize = 1; 
+string[] array = new string[arrSize]; 
+int newArrSize = 1; 
+string[] newArray = new string[newArrSize]; 
+string value; 
 
 for (int i = 0; i < array.Length; i++)
 {
@@ -12,25 +14,42 @@ for (int i = 0; i < array.Length; i++)
 
     if (value == "q")
     {
-        Array.Resize<string>(ref array, arrSize-1);
+        Array.Resize<string>(ref array, arrSize - 1);
         break;
     }
 
     else
     {
         array[i] = value;
-        arrSize++;
 
         if (i == array.Length - 1)
         {
+            arrSize++;
             Array.Resize<string>(ref array, arrSize);
         }
     }
 }
 
+int j = 0;
+
+for (int i = 0; i < array.Length; i++)
+{
+    if (array[i].Length <= 3)
+    {
+        newArray[j] = array[i];
+        j++;
+
+        if (newArrSize == newArray.Length)
+        {
+            newArrSize++;
+            Array.Resize<string>(ref newArray, newArrSize);
+        }
+    }
+}
+
 Console.WriteLine("[{0}]", string.Join(", ", array));
-
-
+Array.Resize<string>(ref newArray, newArrSize - 1);
+Console.WriteLine("[{0}]", string.Join(", ", newArray));
 
 string checkNull(string check)
 {
@@ -51,4 +70,3 @@ string checkNull(string check)
     }
     return value;
 }
-
